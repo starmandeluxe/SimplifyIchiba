@@ -45,6 +45,7 @@
             prices[i].before(itemNames[i]);
         }
     }
+    
     //get rid of the useless line breaks in the item titles
     jQuery('.item_name').find('br').remove();
 
@@ -56,8 +57,8 @@
 
     //add line break after the item title
     var br = document.createElement("br");
-
     for (var j = 0; j < itemNames.length; j++) {
     	itemNames[j].appendChild(br);
     }
+    
 })();
