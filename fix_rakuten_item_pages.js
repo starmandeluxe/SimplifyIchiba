@@ -10,7 +10,7 @@
 
 (function() {
     'use strict';
-    
+
     //find the important stuff on the page
     var itemNames = jQuery('.item_name');
     var itemNumberTitles =  jQuery('.item_number_title');
@@ -37,7 +37,7 @@
                 itemNumbers[i].before(itemNumberTitles[i]);
                 itemNumberTitles[i].before(itemNames[i]);
             }
-            else { 
+            else {
                 itemNumbers[i].before(itemNames[i]);
             }
         }
@@ -45,13 +45,19 @@
             prices[i].before(itemNames[i]);
         }
     }
-
     //get rid of the useless line breaks in the item titles
     jQuery('.item_name').find('br').remove();
-    
+
     //remove images to stop Long Page Syndrome
     jQuery("img").hide();
-    
+
     //get rid of a global bg image
     jQuery("body").css({"background":"none"});
+
+    //add line break after the item title
+    var br = document.createElement("br");
+
+    for (var j = 0; j < itemNames.length; j++) {
+    	itemNames[j].appendChild(br);
+    }
 })();
