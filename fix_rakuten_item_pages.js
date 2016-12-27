@@ -50,5 +50,8 @@
     jQuery('.item_name').find('br').remove();
     
     //remove images to stop Long Page Syndrome
-    jQuery("img").hide();   
+    jQuery("img").hide();
+    
+    //get rid of a global bg image
+    jQuery("body").css({"background":"none"});
 })();
