@@ -76,7 +76,11 @@
         //hide the rest of the page
         jQuery('#pagebody').hide();
 
+        //wrap basket and description in one div
+        jQuery('[id=rakutenLimitedId_aroundCart],.item_desc').wrapAll('<div class="basketAndDesc"></div>');
+
         //make the description aligned to the right to save some space
+        jQuery('[id=rakutenLimitedId_aroundCart]').css("float", "left");
         jQuery('[id=rakutenLimitedId_aroundCart]').css("width", "50%");
         jQuery('.item_desc').css("float", "right");
         jQuery('.item_desc').css("width", "50%");
@@ -86,5 +90,15 @@
             jQuery('.susumeruArea').hide();
             jQuery('#asurakuTable').hide();
         }, 1000);
+
+        //add google translate
+        jQuery('<script>').attr('type', 'text/javascript')
+            .text('function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: \'jp\', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},\'gtranslate\');}')
+            .appendTo('head');
+
+        jQuery.getScript("http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit", function() {
+            jQuery('.item_name').before('<div id="gtranslate" style="width:100px;padding-bottom:20px;margin:auto;margin-top:-50px;"></div>');
+        });
     });
-})();
+}
+)();
