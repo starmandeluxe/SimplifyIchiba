@@ -1,5 +1,5 @@
 # SimplifyIchiba
-Makes Rakuten Ichiba Item Pages easier to view
+Makes Rakuten Ichiba Item Pages easier to view and use!
 
 ## Features
 1. Long page now becomes a short page 
@@ -11,3 +11,6 @@ Makes Rakuten Ichiba Item Pages easier to view
 1. Add TamperMonkey extension to your browser: http://tampermonkey.net/
 2. Import the entire SimplifyIchiba script into it and set TamperMonkey to enable it
 3. Enjoy
+
+## Future Enhancements
+1. English Translation placed below
