@@ -10,7 +10,7 @@
 
 (function() {
     'use strict';
-    jQuery(window).bind("load", function() {
+    jQuery(window).load(function() {
         //find the important stuff on the page
         var itemNames = jQuery('.item_name');
         var itemNumberTitles =  jQuery('.item_number_title');
@@ -19,15 +19,17 @@
 
         //Price area might not be a class. Because Rakuten.
         if (prices.length === 0) {
-            prices =  jQuery('#rakutenLimitedId_cart');
+            prices = jQuery('[id=rakutenLimitedId_cart]');
         }
 
         var baskets = jQuery('[id=rakutenLimitedId_aroundCart]');
+        var descriptions = jQuery('.item_desc');
         var pagebody = jQuery('#pagebody');
 
         //Now move the important stuff to where you'd expect it should be
         for (var i = 0; i < baskets.length; i++) {
-            pagebody.before(baskets[i]);
+            pagebody.before(descriptions[i]);
+            descriptions[i].before(baskets[i]);
             baskets[i].before(prices[i]);
 
             if (itemNumbers.length > 0) {
@@ -61,7 +63,7 @@
             });
         }
 
-        //get rid of a global bg image
+        //get rid of the global bg image
         jQuery("body").css({"background":"none"});
 
         //add line break after the item title
@@ -71,7 +73,15 @@
             itemNames[k].appendChild(br);
         }
 
+        //hide the rest of the page
+        jQuery('#pagebody').hide();
+
+        //make the description aligned to the right to save some space
+        jQuery('[id=rakutenLimitedId_aroundCart]').css("width", "50%");
+        jQuery('.item_desc').css("float", "right");
+        jQuery('.item_desc').css("width", "50%");
+
         //hide the useless recommendation area
-        jQuery('.susumeruArea').hide();
+        setTimeout(function(){ jQuery('.susumeruArea').hide(); }, 1000);
     });
 })();
