@@ -81,7 +81,10 @@
         jQuery('.item_desc').css("float", "right");
         jQuery('.item_desc').css("width", "50%");
 
-        //hide the useless recommendation area
-        setTimeout(function(){ jQuery('.susumeruArea').hide(); }, 1000);
+        //hide the useless recommendation area, asuraku table, etc.
+        setTimeout(function() {
+            jQuery('.susumeruArea').hide();
+            jQuery('#asurakuTable').hide();
+        }, 1000);
     });
 })();
