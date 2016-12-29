@@ -12,3 +12,6 @@ Makes Rakuten Ichiba Item Pages easier to view and use!
 1. Add TamperMonkey extension to your browser: http://tampermonkey.net/
 2. Import the entire SimplifyIchiba script into it and set TamperMonkey to enable it
 3. Enjoy
+
+## Future Roadmap
+1. Convert to standalone Chrome extension
