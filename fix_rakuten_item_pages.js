@@ -11,10 +11,11 @@
 (function() {
     'use strict';
     jQuery(window).load(function() {
+        //import bootstrap
+        jQuery('head').append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />');
+
         //find the important stuff on the page
         var itemNames = jQuery('.item_name');
-        var itemNumberTitles =  jQuery('.item_number_title');
-        var itemNumbers =  jQuery('.item_number');
         var prices =  jQuery('.rakutenLimitedId_cart');
 
         //Price area might not be a class. Because Rakuten.
@@ -28,25 +29,51 @@
 
         //Now move the important stuff to where you'd expect it should be
         for (var i = 0; i < baskets.length; i++) {
-            pagebody.before('<div id="itemSection' + i+ '" style="overflow:hidden;"></div>');
-            jQuery('#itemSection' + i).append(descriptions[i]);
-            descriptions[i].before(baskets[i]);
-            baskets[i].before(prices[i]);
+            pagebody.before('<div id="itemSection' + i + '" style="overflow:hidden;"></div>');
 
-            if (itemNumbers.length > 0) {
-                prices[i].before(itemNumbers[i]);
+            var basketBodyDiv = document.createElement('div');
+            basketBodyDiv.setAttribute("id", "basketBody" + i);
 
-                if (itemNumberTitles.length > 0) {
-                    itemNumbers[i].before(itemNumberTitles[i]);
-                    itemNumberTitles[i].before(itemNames[i]);
-                }
-                else {
-                    itemNumbers[i].before(itemNames[i]);
-                }
-            }
-            else {
-                prices[i].before(itemNames[i]);
-            }
+            var basketContents = jQuery(baskets[i]).children();
+            jQuery.each(basketContents, function(s, val) {
+                basketBodyDiv.append(basketContents[s]);
+            });
+
+            baskets[i].append(basketBodyDiv);
+
+            var basketHeader = document.createElement('div');
+            basketHeader.setAttribute("id", "basketHeader" + i);
+            basketHeader.innerHTML = "Cart Options";
+            baskets[i].prepend(basketHeader);
+
+            jQuery('#itemSection' + i).append(baskets[i]);
+
+            var descDiv = document.createElement('div');
+            descDiv.setAttribute("id", "descSection" + i);
+
+            var descHeader = document.createElement('div');
+            descHeader.setAttribute("id", "descHeader" + i);
+            descHeader.innerHTML = "Item Description";
+
+            descDiv.append(descHeader);
+
+            var descBodyDiv = document.createElement('div');
+            descBodyDiv.setAttribute("id", "descBody" + i);
+            descBodyDiv.append(descriptions[i]);
+            descDiv.append(descBodyDiv);
+
+            baskets[i].before(descDiv);
+            var priceDiv = document.createElement('div');
+            priceDiv.setAttribute("id", "priceSection" + i);
+            descDiv.before(priceDiv);
+
+            //unwrap the price section table, reconstruct as text only
+            var priceContent = jQuery(prices[i]).find('span');
+            jQuery.each(priceContent, function(t, val) {
+                jQuery('#priceSection' + i).append(priceContent[t]);
+            });
+
+            jQuery('#priceSection' + i).before(itemNames[i]);
 
             //if there are multiple items, break them up with some whitespace
             if (i > 0) {
@@ -72,31 +99,43 @@
         //get rid of the global bg image
         jQuery("body").css({"background":"none"});
 
-        //add line break after the item title
-        var br = document.createElement("br");
-
-        for (var k = 0; k < itemNames.length; k++) {
-            itemNames[k].appendChild(br);
-        }
-
         //hide the rest of the page
         jQuery('#pagebody').hide();
 
-        //wrap basket and description in one div
-        //jQuery('[id=rakutenLimitedId_aroundCart],.item_desc').wrapAll('<div class="basketAndDesc"></div>');
-
-        //make the description aligned to the right to save some space
-        jQuery('[id=rakutenLimitedId_aroundCart]').css("float", "left");
-        jQuery('[id=rakutenLimitedId_aroundCart]').css("width", "50%");
-        jQuery('.item_desc').css("float", "right");
-        jQuery('.item_desc').css("width", "50%");
-
         //hide the useless recommendation area, asuraku table, etc.
         setTimeout(function() {
+            jQuery('div[align=center]').hide();
             jQuery('.susumeruArea').hide();
             jQuery('[id=asurakuTable]').hide();
             jQuery('.riMb10').hide();
-        }, 1000);
+            jQuery('.item_number_title').hide();
+            jQuery('.item_number').hide();
+        }, 500);
+
+
+        //and add line breaks after the item titles
+        for (var k = 0; k < itemNames.length; k++) {
+            var br = document.createElement("br");
+            itemNames[k].append(br);
+        }
+
+        //make everything beautiful
+        jQuery('[id^=descSection]').addClass("panel panel-default");
+        jQuery('[id^=descHeader]').addClass("panel-heading");
+        jQuery('[id^=basketHeader]').addClass("panel-heading");
+        jQuery('[id^=descBody]').addClass("panel-body");
+        jQuery('[id^=basketBody]').addClass("panel-body");
+        jQuery('.item_name').addClass("panel");
+        jQuery('[id=rakutenLimitedId_aroundCart]').addClass("panel panel-default");
+        jQuery('select').addClass('form-control');
+        jQuery('[id=rakutenLimitedId_aroundCart]').css("float", "left");
+        jQuery('[id^=priceSection]').css("text-align", "center");
+        jQuery('.item_name').css("display", "table");
+        jQuery('.item_name').css("margin", "0 auto");
+        jQuery('.item_name').css("padding", "20px");
+        jQuery('[id^=descSection]').css("float", "left");
+        jQuery('[id^=descSection]').css("margin-right", "20px");
+        jQuery('[id^=descSection]').css("margin-left", "20px");
 
         //add google translate
         jQuery('<script>').attr('type', 'text/javascript')
