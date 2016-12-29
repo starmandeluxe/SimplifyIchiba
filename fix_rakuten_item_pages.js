@@ -28,7 +28,8 @@
 
         //Now move the important stuff to where you'd expect it should be
         for (var i = 0; i < baskets.length; i++) {
-            pagebody.before(descriptions[i]);
+            pagebody.before('<div id="itemSection' + i+ '" style="overflow:hidden;"></div>');
+            jQuery('#itemSection' + i).append(descriptions[i]);
             descriptions[i].before(baskets[i]);
             baskets[i].before(prices[i]);
 
@@ -45,6 +46,11 @@
             }
             else {
                 prices[i].before(itemNames[i]);
+            }
+
+            //if there are multiple items, break them up with some whitespace
+            if (i > 0) {
+                jQuery("#itemSection" + i).prepend('<br />');
             }
         }
 
@@ -77,7 +83,7 @@
         jQuery('#pagebody').hide();
 
         //wrap basket and description in one div
-        jQuery('[id=rakutenLimitedId_aroundCart],.item_desc').wrapAll('<div class="basketAndDesc"></div>');
+        //jQuery('[id=rakutenLimitedId_aroundCart],.item_desc').wrapAll('<div class="basketAndDesc"></div>');
 
         //make the description aligned to the right to save some space
         jQuery('[id=rakutenLimitedId_aroundCart]').css("float", "left");
@@ -88,7 +94,8 @@
         //hide the useless recommendation area, asuraku table, etc.
         setTimeout(function() {
             jQuery('.susumeruArea').hide();
-            jQuery('#asurakuTable').hide();
+            jQuery('[id=asurakuTable]').hide();
+            jQuery('.riMb10').hide();
         }, 1000);
 
         //add google translate
@@ -97,7 +104,7 @@
             .appendTo('head');
 
         jQuery.getScript("http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit", function() {
-            jQuery('.item_name').before('<div id="gtranslate" style="width:100px;padding-bottom:20px;margin:auto;margin-top:-50px;"></div>');
+            jQuery('#itemSection0').before('<div id="gtranslate" style="width:100px;padding-bottom:20px;margin:auto;margin-top:-40px;"></div>');
         });
     });
 }
