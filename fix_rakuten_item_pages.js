@@ -87,14 +87,35 @@
         //remove images to stop Long Page Syndrome
         jQuery("img").hide();
 
-        //grab the main image (probably? merchants aren't consistent) that is relevant to the product
+        //bundle the images
         var images = jQuery('.rakutenLimitedId_ImageMain1-3').find('img');
+
+        var imgDiv = document.createElement('div');
+        imgDiv.setAttribute("id", "imgSection");
+        jQuery(imgDiv).css("margin", "20px");
+        jQuery(imgDiv).addClass("panel panel-default");
+
+        var imgHeaderDiv = document.createElement('div');
+        imgHeaderDiv.setAttribute("id", "imgSectionHeader");
+        imgHeaderDiv.innerHTML = "Images";
+        jQuery(imgHeaderDiv).addClass("panel-heading");
+        jQuery(imgHeaderDiv).css("text-align", "center");
+
+        var imgBodyDiv = document.createElement('div');
+        imgBodyDiv.setAttribute("id", "imgBody");
+        jQuery(imgBodyDiv).addClass("panel-body");
+
         if (images.length > 0) {
             jQuery.each(images, function(j, val) {
                 jQuery(images[j]).show();
-                pagebody.before(images[j]);
+                imgBodyDiv.append(images[j]);
+                //pagebody.before(images[j]);
             });
         }
+
+        imgDiv.append(imgHeaderDiv);
+        imgDiv.append(imgBodyDiv);
+        pagebody.before(imgDiv);
 
         //get rid of the global bg image
         jQuery("body").css({"background":"none"});
@@ -107,7 +128,7 @@
             jQuery('div[align=center]').hide();
             jQuery('.susumeruArea').hide();
             jQuery('[id=asurakuTable]').hide();
-            jQuery('.riMb10').hide();
+            //jQuery('.riMb10').hide();
             jQuery('.item_number_title').hide();
             jQuery('.item_number').hide();
         }, 500);
