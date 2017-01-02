@@ -9,9 +9,20 @@ Makes Rakuten Ichiba Item Pages easier to view and use!
 
 ## Installation
 
+### *NEW!* Chrome Extension
+
+1. Download the .crx file
+2. Open chrome://extensions/ in the Chrome browser
+3. Drag the downloaded extension file into this tab, confirm by clicking "Add Extension".
+4. Browse any items on Rakuten and Enjoy!
+
+### If you are using TamperMonkey...
+
 1. Add TamperMonkey extension to your browser: http://tampermonkey.net/
-2. Import the entire SimplifyIchiba script into it and set TamperMonkey to enable it
-3. Enjoy
+2. Import the entire fix_rakuten_item_pages.js script into it and set TamperMonkey to enable it
+3. Browse any items on Rakuten and Enjoy!
 
 ## Future Roadmap
-1. Convert to standalone Chrome extension
+1. Convert to standalone Chrome extension - DONE
+2. Add Google Translate button to get English support - DONE
+3. Optimize visuals with bootstrap - IN PROGRESS
