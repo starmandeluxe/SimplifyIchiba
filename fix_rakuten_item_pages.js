@@ -10,7 +10,7 @@
 
 (function() {
     'use strict';
-    jQuery(window).load(function() {
+    jQuery(window).on('load', function() {
         //import bootstrap
         jQuery('head').append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />');
 
@@ -134,6 +134,43 @@
         }, 500);
 
 
+        //and add line breaks after the item titles
+        for (var k = 0; k < itemNames.length; k++) {
+            var br = document.createElement("br");
+            itemNames[k].append(br);
+        }
+
+        //make everything beautiful
+        jQuery('[id^=descSection]').addClass("panel panel-default");
+        jQuery('[id^=descHeader]').addClass("panel-heading");
+        jQuery('[id^=basketHeader]').addClass("panel-heading");
+        jQuery('[id^=descBody]').addClass("panel-body");
+        jQuery('[id^=basketBody]').addClass("panel-body");
+        jQuery('.item_name').addClass("panel");
+        jQuery('[id=rakutenLimitedId_aroundCart]').addClass("panel panel-default");
+        jQuery('select').addClass('form-control');
+        jQuery('[id=rakutenLimitedId_aroundCart]').css("float", "left");
+        jQuery('[id=rakutenLimitedId_aroundCart]').css("width", "45%");
+        jQuery('[id^=priceSection]').css("text-align", "center");
+        jQuery('.item_name').css("display", "table");
+        jQuery('.item_name').css("margin", "0 auto");
+        jQuery('.item_name').css("padding", "20px");
+        jQuery('[id^=descSection]').css("float", "left");
+        jQuery('[id^=descSection]').css("width", "45%");
+        jQuery('[id^=descSection]').css("margin-right", "20px");
+        jQuery('[id^=descSection]').css("margin-left", "20px");
+
+        //add google translate
+        jQuery('<script>').attr('type', 'text/javascript')
+            .text('function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: \'jp\', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},\'gtranslate\');}')
+            .appendTo('head');
+
+        jQuery.getScript("http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit", function() {
+            jQuery('#itemSection0').before('<div id="gtranslate" style="width:100px;padding-bottom:20px;margin:auto;margin-top:-40px;"></div>');
+        });
+    });
+}
+)();
         //and add line breaks after the item titles
         for (var k = 0; k < itemNames.length; k++) {
             var br = document.createElement("br");
