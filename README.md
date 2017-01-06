@@ -11,6 +11,10 @@ Makes Rakuten Ichiba Item Pages easier to view and use!
 
 ### *NEW!* Chrome Extension
 
+https://chrome.google.com/webstore/detail/simplify-ichiba/nepdmnjfnghfbgoeoloipadogjpgdfbm
+
+Manual Loading (disclaimer: with Chrome's new security policy, you may need to unpack the .crx file first to prevent Chrome from removing it automatically)
+
 1. Download the .crx file
 2. Open chrome://extensions/ in the Chrome browser
 3. Drag the downloaded extension file into this tab, confirm by clicking "Add Extension".
