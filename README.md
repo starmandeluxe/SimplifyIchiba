@@ -27,6 +27,4 @@ Manual Loading (disclaimer: with Chrome's new security policy, you may need to u
 3. Browse any items on Rakuten and Enjoy!
 
 ## Future Roadmap
-1. Convert to standalone Chrome extension - DONE
-2. Add Google Translate button to get English support - DONE
-3. Optimize visuals with bootstrap - IN PROGRESS
+1. Add option to toggle the Chrome extension on/off
